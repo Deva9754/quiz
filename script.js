@@ -1,106 +1,196 @@
+// const questions =[
+//   {
+//     question:  "which is largest anjimal in the world ?" ,
+//     answers : [
+//       {text: "shark",correct : false},
+//       {text: "blue whale",correct : true },
+//       {text: "Elephant",correct : false},
+//       {text: "Giraffe",correct : false},
+
+//     ]
+//   },
+//   {
+//     question:  "which is largest anjimal in the world ?" ,
+//     answers : [
+//       {text: "shark",correct : false},
+//       {text: "blue whale",correct : true },
+//       {text: "Elephant",correct : false},
+//       {text: "Giraffe",correct : false},
+
+//     ]
+//   },
+//   {
+//     question:  "which is largest anjimal in the world ?" ,
+//     answers : [
+//       {text: "shark",correct : false},
+//       {text: "blue whale",correct : true },
+//       {text: "Elephant",correct : false},
+//       {text: "Giraffe",correct : false},
+
+//     ]
+//   },
+//   {
+//     question:  "which is largest anjimal in the world ?" ,
+//     answers : [
+//       {text: "shark",correct : false},
+//       {text: "blue whale",correct : true },
+//       {text: "Elephant",correct : false},
+//       {text: "Giraffe",correct : false},
+
+//     ]
+//   } 
+// ];
+
+// const questionElement = document.getElementById("question");
+// const answerButton = document.getElementById("answer-buttons");
+// const nextButton = document.getElementById("next-btn");
+
+// let currentQuestionIndex = 0;
+// let score = 0;
+
+// function startQuiz(){
+//   currentQuestionIndex = 0;
+//   score = 0;
+//   nextButton.innerHTML = "Next";
+//   showQuestion();
+// }
+// function showQuestion(){
+//   let currentQuestion = question[currentQuestionIndex];
+//   let questionNo = currentQuestionIndex + 1;
+//   questionElement.innerHTML = questionNo + "." + currentQuestion.question;
+
+//   currentQuestion.answers.forEach(answers=> {
+//     const button = document.createElement("button");
+//     button.innerHTML = answers.text;
+//     button.classList.add("btn");
+//     answerButton.appendChild(button);
+    
+//   });
+// }
+// startQuiz();
+
 const questions = [
-    {
-        question: "what's ur name ? ",
-        answers: [
-            { text: "shark", correct: false },
-            { text: "sharkk", correct: true },
-            { text: "sharkk", correct: false },
-            { text: "sharkk", correct: false },
+  {
+    question: "Which is the largest animal in the world?",
+    answers: [
+      { text: "Shark", correct: false },
+      { text: "Blue whale", correct: true },
+      { text: "Elephant", correct: false },
+      { text: "Giraffe", correct: false },
+    ],
+  },
+  {
+    question: "Which is the largest animal in the world?",
+    answers: [
+      { text: "Shark", correct: false },
+      { text: "Blue whale", correct: true },
+      { text: "Elephant", correct: false },
+      { text: "Giraffe", correct: false },
+    ],
+  },
+  {
+    question: "Which is the largest animal in the world?",
+    answers: [
+      { text: "Shark", correct: false },
+      { text: "Blue whale", correct: true },
+      { text: "Elephant", correct: false },
+      { text: "Giraffe", correct: false },
+    ],
+  },
+  {
+    question: "Which is the largest animal in the world?",
+    answers: [
+      { text: "Shark", correct: false },
+      { text: "Blue whale", correct: true },
+      { text: "Elephant", correct: false },
+      { text: "Giraffe", correct: false },
+    ],
+  },
+];
 
-        ]
-    }
-]
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
 
-const questionelement = document.getElementById("");
-const answerButton = document.getElementById("");
-const Next = document.getElementById("");
-
-let currentquestionindex = 0;
+let currentQuestionIndex = 0;
 let score = 0;
 
-function startquiz() {
-    currentquestionindex = 0;
-    score = 0;
-    nextbutton.innerHTML = "Next";
-    Showquestions();
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.innerHTML = "Next";
+  showQuestion();
 }
 
-function showquestion() {
-    resetState();
-    let currentquestion = question[currentquestionindex];
-    let questionno = currentquestionindex + 1;
-    questionelement.innerHTML = questionno + "." + currentquestion.question;
+function showQuestion() {
+  resetState();
+  const currentQuestion = questions[currentQuestionIndex];
+  const questionNo = currentQuestionIndex + 1;
+  questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 
-    currentquestion.answers.foreach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButton.appendChild(button);
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click", selectanswer);
-
-
-    });
-
-}
-
-function resetState() {
-    nextbutton.style.display = "none";
-    while (answerButton.firstChild) {
-        answerButton.removeChild(answerButton.firstChild);
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.innerHTML = answer.text;
+    button.classList.add("btn");
+    answerButtons.appendChild(button);
+    if(answer.correct){
+      button.dataset.correct = answer.correct;
     }
+    button.addEventListener("click", selectAnswer);
+  });
 }
-
-function selectanswer(ans) {
-
-    const selectbtn = ans.target;
-    const iscorrect = selectbtn.dataset.correct === "true";
-    if (iscorrect) {
-        selectbtn.classList.add("correct");
-        score++;
-    } else {
-        selectbtn.classList.add("incorrect");
-    }
-
+function resetState(){
+  nextButton.style.display="none";
+  while(answerButtons.firstChild){
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
 }
-
-Array.from(answerButton.children).forEach(button => {
-    if (button.dataset.correct === "true") {
-        button.classList.add("correct");
+function selectAnswer(e) {
+  const selectBtn = e.target;
+  const iscorrect = selectBtn.dataset.correct === "true";
+  if (iscorrect) {
+    selectBtn.classList.add("correct");
+    score++;
+    
+  }else{
+    selectBtn.classList.add("incorrect");
+  }
+  Array.from(answerButtons.children).forEach(button=>{
+    if(button.dataset.correct === "true"){
+      button.classList.add("correct");
     }
     button.disabled = true;
-    nextbutton.style.display = "block";
+  });
+  nextButton.style.display = "block";
+}
+
+
+
+function handleNextButton(){
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+
+nextButton.addEventListener("click",()=>{
+  if(currentQuestionIndex < questions.length){
+handleNextButton();
+  }else{
+    startQuiz();
+  }
 });
+ 
 
-function handlenextbutton() {
-    currentquestionindex++;
-    if (currentquestionindex < questions.length) {
-        showquestion();
-    }
-    else {
-        showscore();
-    }
+
+function showScore() {
+  resetState();
+  questionElement.innerHTML = `Your score is ${score} out of ${questions.length}`;
+  nextButton.innerHTML = "Play Again";
+  nextButton.style.display = "block";
 }
 
-nextbutton.addEventListener("click", () => {
-    if (currentquestionindex < questions.length) {
-        handlenextbutton();
-    }
-    else {
-        startquiz();
-    }
-
-})
-
-function showscore() {
-    resetState();
-    questionelement.innerHTML = ` your score is ${score} out of ${question.length}`;
-    nextbutton, innerHTML = "playagain";
-    nextbutton.style.disabled = "block";
-}
-
-
-
-startquiz();
+startQuiz();
